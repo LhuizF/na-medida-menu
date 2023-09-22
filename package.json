@@ -1,5 +1,5 @@
 {
-  "name": "marmita-app",
+  "name": "na_medida_app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -16,10 +16,17 @@
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
     "next": "13.4.19",
+    "pdfjs-dist": "^3.10.111",
     "postcss": "8.4.29",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tailwindcss": "3.3.3",
     "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.7.2",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.3"
   }
 }
