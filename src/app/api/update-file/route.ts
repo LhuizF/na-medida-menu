@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server'
 import * as PDFJS from 'pdfjs-dist';
 import { TextItem } from 'pdfjs-dist/types/src/display/api';
-//import workerSrc from 'pdfjs-dist/build/pdf.worker.js';
+import workerSrc from 'pdfjs-dist/build/pdf.worker.js';
+import { insertManyOptions } from '@/services'
 
 interface IPdfInPages {
   [x: number]: string[]
@@ -11,16 +12,17 @@ enum CONFIGS {
   FIRST_PAGE = 32,
   LAST_PAGE = 38,
   LAST_ITEM_ROW = 'lactose',
-  INITIAL_LETTER = 'P-'
+  INITIAL_LETTER = 'P-',
+  MENU_NAME = 'Cardápio Porções'
 }
 
 export async function POST(request: Request) {
   const formData = await request.formData();
   const file = formData.get('file') as unknown as File;
-  // PDFJS.GlobalWorkerOptions.workerSrc = workerSrc
+  PDFJS.GlobalWorkerOptions.workerSrc = workerSrc
 
   if (!file) {
-    return NextResponse.json({ message: 'Deu ruim' })
+    return NextResponse.json({ message: 'Arquivo não encontrado' })
   }
 
   const bytes = await file.arrayBuffer();
@@ -71,7 +73,6 @@ export async function POST(request: Request) {
       return acc;
     }, [] as Array<string[]>)
 
-
   const normalizeData = portionsData.filter(item => !!item.length)
     .map((option) => {
 
@@ -95,13 +96,22 @@ export async function POST(request: Request) {
       return cleanRow
     })
 
-  normalizeData.forEach((item, index) => {
-    if (item.length > 7) {
-      console.warn(index)
-    }
-  })
+  const normalizeOptions = normalizeData.reduce((acc, item) => {
+    const [code, name, weight, price] = item
+    const priceFloat = +price.replace(',', '.')
 
-  return NextResponse.json(normalizeData)
+    if (!acc[code]) {
+      // Se não existir, cria um objeto com o código como chave
+      acc[code] = { code, name, weight, price, priceFloat };
+    }
+
+    return acc
+  }, {} as any)
+
+
+  const totalOptions = await insertManyOptions.handle(CONFIGS.MENU_NAME, Object.values(normalizeOptions))
+
+  return NextResponse.json({ totalOptions })
 }
 
 export const config = {
@@ -109,4 +119,3 @@ export const config = {
     bodyParser: false
   }
 }
-
