@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
-import { Header } from "@/components/header";
+import { TabBar } from "@/components/TabBar";
 
 const montserrat = Montserrat({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
@@ -23,8 +23,8 @@ export default function RootLayout({
     <html lang="pt-br">
       <body className={montserrat.className}>
         <>
-          <Header />
           {children}
+          <TabBar />
         </>
       </body>
     </html>
