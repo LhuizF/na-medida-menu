@@ -1,5 +1,3 @@
-"use client";
-import { useState } from "react";
 import {
   IconButton,
   FormControl,
@@ -10,23 +8,26 @@ import {
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { red } from "@mui/material/colors";
 
-export const InputSearch: React.FC = () => {
-  const [search, setSearch] = useState("");
+interface Props {
+  value: string;
+  onChange: (value: string) => void;
+}
 
+export const InputSearch: React.FC<Props> = ({ value, onChange }) => {
   const handleCleanInput = () => {
-    setSearch("");
+    onChange("");
   };
 
   return (
     <FormControl sx={{ width: "100%" }} variant="outlined">
       <InputLabel>Buscar</InputLabel>
       <OutlinedInput
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
         endAdornment={
           <InputAdornment onClick={handleCleanInput} position="end">
             <IconButton edge="end">
-              {!!search && <HighlightOffIcon sx={{ color: red[700] }} />}
+              {!!value && <HighlightOffIcon sx={{ color: red[700] }} />}
             </IconButton>
           </InputAdornment>
         }

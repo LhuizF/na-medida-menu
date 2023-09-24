@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Providers } from "./providers";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { TabBar } from "@/components/TabBar";
@@ -22,10 +23,10 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={montserrat.className}>
-        <>
+        <Providers>
           {children}
           <TabBar />
-        </>
+        </Providers>
       </body>
     </html>
   );
