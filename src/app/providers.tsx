@@ -1,5 +1,6 @@
 "use client";
 import { QueryClientProvider, QueryClient } from "react-query";
+import { CartProvider } from "@/contexts/cart";
 
 const queryClient = new QueryClient();
 
@@ -9,6 +10,8 @@ interface ProvidersProps {
 
 export function Providers({ children }: ProvidersProps) {
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <CartProvider>{children}</CartProvider>
+    </QueryClientProvider>
   );
 }
