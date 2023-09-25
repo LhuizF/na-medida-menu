@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:push": "npx prisma db push"
+    "db:push": "npx prisma db push",
+    "build:vercel": "npx prisma generate && next build"
   },
   "prisma": {
     "seed": "sucrase-node ./prisma/seed.ts"
