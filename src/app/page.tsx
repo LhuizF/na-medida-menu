@@ -1,26 +1,38 @@
 "use client";
 import { InputSearch } from "@/components/InputSearch";
 import { ListOptions } from "@/components/ListOptions";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 
-const findOptions = async () => {
-  const repos = await fetch("/api/options");
+const findOptions = async (search?: string, page?: number) => {
+  const queryParams = new URLSearchParams();
+  if (search) {
+    queryParams.append("search", search);
+  }
 
-  const options = await repos.json();
-  //console.log(options);
+  if (page) {
+    queryParams.append("page", page.toString());
+  }
+
+  const response = await fetch(`/api/options?${queryParams}`);
+
+  const options = await response.json();
 
   return options;
 };
 
 export default function Home() {
   const [search, setSearch] = useState("");
-  const { data, isLoading, isError, refetch, isRefetching } = useQuery(
-    "options",
-    () => findOptions(),
-    { refetchOnWindowFocus: false },
-  );
-  console.log(data);
+
+  const { data, isLoading, isError, refetch, isRefetching } =
+    useQuery<IFindOptionsResponse>("options", () => findOptions(search), {
+      refetchOnWindowFocus: false,
+    });
+
+  useEffect(() => {
+    refetch();
+  }, [search]);
+
   return (
     <>
       <main className="min-h-screen bg-gray-300 px-5 py-3">
