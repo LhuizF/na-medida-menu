@@ -14,7 +14,7 @@ export class OptionRepository implements IOptionRepository {
     page,
     search,
     menuId,
-  }: FindOptionsParams): Promise<OptionDB[]> {
+  }: FindOptionsParams): Promise<IOptionDB[]> {
     const limit = 20;
     const currentPage = page || 1;
 
@@ -35,7 +35,7 @@ export class OptionRepository implements IOptionRepository {
       },
     });
 
-    const options: OptionDB[] = optionsRows.map((option: any) => ({
+    const options: IOptionDB[] = optionsRows.map((option: any) => ({
       id: option._id.$oid,
       code: option.code,
       name: option.name,

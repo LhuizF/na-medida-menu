@@ -19,20 +19,22 @@ export const InputSearch: React.FC<Props> = ({ value, onChange }) => {
   };
 
   return (
-    <FormControl sx={{ width: "100%" }} variant="outlined">
-      <InputLabel>Buscar</InputLabel>
-      <OutlinedInput
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        endAdornment={
-          <InputAdornment onClick={handleCleanInput} position="end">
-            <IconButton edge="end">
-              {!!value && <HighlightOffIcon sx={{ color: red[700] }} />}
-            </IconButton>
-          </InputAdornment>
-        }
-        label="Buscar"
-      />
-    </FormControl>
+    <div className="fixed w-full top-0 left-0 z-10 py-2 px-5 bg-slate-200 drop-shadow-lg">
+      <FormControl sx={{ width: "100%" }} size="small" variant="outlined">
+        <InputLabel>Buscar</InputLabel>
+        <OutlinedInput
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          endAdornment={
+            <InputAdornment onClick={handleCleanInput} position="end">
+              <IconButton edge="end">
+                {!!value && <HighlightOffIcon sx={{ color: red[700] }} />}
+              </IconButton>
+            </InputAdornment>
+          }
+          label="Buscar"
+        />
+      </FormControl>
+    </div>
   );
 };

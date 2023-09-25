@@ -1,5 +1,6 @@
 "use client";
 import { InputSearch } from "@/components/InputSearch";
+import { ListOptions } from "@/components/ListOptions";
 import { useState } from "react";
 import { useQuery } from "react-query";
 
@@ -24,16 +25,14 @@ export default function Home() {
     <>
       <main className="min-h-screen bg-gray-300 px-5 py-3">
         <InputSearch value={search} onChange={setSearch} />
-        {isLoading && <p>Loading...</p>}
-        {isError && <p>Error</p>}
-        {isRefetching && <p>Refetching...</p>}
-        {data?.options &&
-          data.options.length > 0 &&
-          data.options.map((item) => (
-            <p key={item.id} className="text-black">
-              {item.name}
-            </p>
-          ))}
+        <div className="pt-12">
+          {isLoading && <p>Loading...</p>}
+          {isError && <p>Error</p>}
+          {isRefetching && <p>Refetching...</p>}
+          {data?.options && data.options.length > 0 && (
+            <ListOptions options={data.options} />
+          )}
+        </div>
       </main>
     </>
   );

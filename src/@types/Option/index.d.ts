@@ -7,7 +7,7 @@ interface IOption {
   menuId: string;
 }
 
-interface OptionDB extends IOption {
+interface IOptionDB extends IOption {
   id: string;
 }
 
@@ -19,6 +19,6 @@ interface FindOptionsParams {
 
 interface IOptionRepository {
   insertManyOption(options: IOption[]): Promise<number>;
-  findOptions(params: FindOptionsParams): Promise<OptionDB[]>;
+  findOptions(params: FindOptionsParams): Promise<IOptionDB[]>;
   countOptions(params: FindOptionsParams): Promise<number>;
 }
