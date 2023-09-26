@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import * as PDFJS from "pdfjs-dist";
 import { TextItem } from "pdfjs-dist/types/src/display/api";
-import workerSrc from "pdfjs-dist/build/pdf.worker.js";
 import { insertManyOptions } from "@/services";
+// @ts-ignore
+import workerSrc from "pdfjs-dist/build/pdf.worker.js";
 
 interface IPdfInPages {
   [x: number]: string[];
@@ -105,7 +106,6 @@ export async function POST(request: Request) {
     const priceFloat = +price.replace(",", ".");
 
     if (!acc[code]) {
-      // Se não existir, cria um objeto com o código como chave
       acc[code] = { code, name, weight, price, priceFloat };
     }
 
@@ -120,8 +120,8 @@ export async function POST(request: Request) {
   return NextResponse.json({ totalOptions });
 }
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+// export const config = {
+//   api: {
+//     bodyParser: false,
+//   },
+// };
