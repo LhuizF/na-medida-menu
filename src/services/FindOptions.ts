@@ -1,4 +1,5 @@
 export class FindOptions {
+  private readonly limit = 20;
   constructor(
     private readonly menuRepository: IMenuRepository,
     private readonly optionRepository: IOptionRepository,
@@ -19,10 +20,10 @@ export class FindOptions {
       menuId,
     };
 
-    const options = await this.optionRepository.findOptions(params);
+    const options = await this.optionRepository.findOptions(params, this.limit);
 
     const totalOptions = await this.optionRepository.countOptions(params);
 
-    return { totalOptions, options };
+    return { totalPages: Math.ceil(totalOptions / this.limit), options };
   }
 }

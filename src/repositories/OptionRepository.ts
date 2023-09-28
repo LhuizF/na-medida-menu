@@ -10,12 +10,10 @@ export class OptionRepository implements IOptionRepository {
     return optionsCreated.count;
   }
 
-  async findOptions({
-    page,
-    search,
-    menuId,
-  }: FindOptionsParams): Promise<IOptionDB[]> {
-    const limit = 20;
+  async findOptions(
+    { page, search, menuId }: FindOptionsParams,
+    limit: number,
+  ): Promise<IOptionDB[]> {
     const currentPage = page || 1;
 
     // const options = await prisma.option.findMany({
@@ -65,9 +63,3 @@ export class OptionRepository implements IOptionRepository {
     return filter;
   }
 }
-
-/**
- * $queryRaw`
-    db.User.find({ name: { $regex: new RegExp(${removeAccents(name), 'i'}) } });
-  `
- */

@@ -19,6 +19,6 @@ interface FindOptionsParams {
 
 interface IOptionRepository {
   insertManyOption(options: IOption[]): Promise<number>;
-  findOptions(params: FindOptionsParams): Promise<IOptionDB[]>;
+  findOptions(params: FindOptionsParams, limit: number): Promise<IOptionDB[]>;
   countOptions(params: FindOptionsParams): Promise<number>;
 }

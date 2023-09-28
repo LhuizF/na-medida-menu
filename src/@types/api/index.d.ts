@@ -1,4 +1,4 @@
 interface IFindOptionsResponse {
-  totalOptions: number;
+  totalPages: number;
   options: IOptionDB[];
 }
