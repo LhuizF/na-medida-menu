@@ -2,7 +2,9 @@
 import { useCart } from "@/contexts/cart";
 
 export const TabBar: React.FC = () => {
-  const { getTotalItems, getTotalPrice } = useCart();
+  const { getTotalItems, getTotalPrice, items } = useCart();
+
+  if (items.length === 0) return <></>;
 
   return (
     <div className="bg-slate-600 sticky bottom-0 w-full h-12 px-4 flex items-center justify-end drop-shadow-[0_-3px_3px_rgba(0,0,0,0.50)]">
