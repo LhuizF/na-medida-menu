@@ -22,6 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br">
+      <link rel="icon" href="../../public/menu.ico" />
       <body className={`${montserrat.className} bg-secondary`}>
         <Providers>
           <div className="max-w-xl m-auto shadow-xl">
