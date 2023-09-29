@@ -10,7 +10,7 @@ interface Props {
 
 export const ListOptions: React.FC<Props> = ({ options }) => {
   const { addItem, removeItem, getItemAmount } = useCart();
-  console.log(options.length);
+
   return (
     <div className="flex flex-col gap-4">
       {options.map((option) => {
