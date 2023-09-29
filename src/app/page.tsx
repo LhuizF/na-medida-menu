@@ -70,7 +70,7 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center w-screen h-screen bg-gray-300">
+      <div className="flex items-center justify-center h-screen bg-secondary">
         <CircularProgress />
       </div>
     );
@@ -78,20 +78,22 @@ export default function Home() {
 
   return (
     <>
-      <main className="min-h-screen bg-gray-300 py-3 relative">
+      <main className="min-h-screen bg-secondary">
         <InputSearch value={search} onChange={handleSearch} />
-        {isRefetching && (
-          <div className="fixed top-16 z-10 w-full flex justify-center">
-            <CircularProgress size={22} />
-          </div>
-        )}
-        <div className="pt-14 px-5">
+
+        <div className="p-5">
           {isError && <p>Error</p>}
           {allOptions && allOptions.length > 0 && (
             <ListOptions options={allOptions} />
           )}
         </div>
+
         <div id="end" />
+        {isRefetching && (
+          <div className="top-16 z-10 w-full flex justify-center">
+            <CircularProgress size={22} />
+          </div>
+        )}
       </main>
     </>
   );

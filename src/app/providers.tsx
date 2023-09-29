@@ -1,6 +1,8 @@
 "use client";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { CartProvider } from "@/contexts/cart";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "@/styles";
 
 const queryClient = new QueryClient();
 
@@ -11,7 +13,9 @@ interface ProvidersProps {
 export function Providers({ children }: ProvidersProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <CartProvider>{children}</CartProvider>
+      <ThemeProvider theme={theme}>
+        <CartProvider>{children}</CartProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
