@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useCart } from "@/contexts/cart";
-import { Send } from "@mui/icons-material";
+import { Send, WhatsApp } from "@mui/icons-material";
 import Checkbox from "@mui/material/Checkbox";
 import { FormControlLabel } from "@mui/material";
 
@@ -41,7 +41,7 @@ export const TabBar: React.FC = () => {
           onClick={sendOrder}
           className="flex items-center justify-center bg-green-500 rounded-full w-8 h-8"
         >
-          <Send className="text-white" fontSize="small" />
+          <WhatsApp className="text-white" fontSize="small" />
         </button>
         <FormControlLabel
           control={

@@ -1,9 +1,11 @@
 "use client";
-import { Header } from "@/components/Header";
-import { ListOptions } from "@/components/ListOptions";
+
 import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import { CircularProgress } from "@mui/material";
+import { Header } from "@/components/Header";
+import { ListOptions } from "@/components/ListOptions";
+import { Error as ErrorComponent } from "@/components/Error";
 
 const findOptions = async (search?: string, page?: number) => {
   const queryParams = new URLSearchParams();
@@ -73,6 +75,10 @@ export default function Home() {
         <CircularProgress />
       </div>
     );
+  }
+
+  if (isError) {
+    return <ErrorComponent />;
   }
 
   return (

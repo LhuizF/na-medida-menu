@@ -31,10 +31,11 @@ export const Header: React.FC<Props> = ({ value, onChange }) => {
           value={value}
           onChange={(e) => onChange(e.target.value)}
           color="primary"
+          sx={{ backgroundColor: "white" }}
           endAdornment={
             <InputAdornment onClick={handleCleanInput} position="end">
               <IconButton edge="end">
-                {!!value && <HighlightOff sx={{ color: red[700] }} />}
+                {!!value && <HighlightOff sx={{ color: red[400] }} />}
               </IconButton>
             </InputAdornment>
           }
