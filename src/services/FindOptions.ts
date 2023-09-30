@@ -3,7 +3,7 @@ export class FindOptions {
   constructor(
     private readonly menuRepository: IMenuRepository,
     private readonly optionRepository: IOptionRepository,
-  ) {}
+  ) { }
 
   async handle({ page, search, menuId }: FindOptionsParams) {
     if (menuId) {
@@ -24,6 +24,10 @@ export class FindOptions {
 
     const totalOptions = await this.optionRepository.countOptions(params);
 
-    return { totalPages: Math.ceil(totalOptions / this.limit), options };
+    return {
+      totalPages: Math.ceil(totalOptions / this.limit),
+      totalOptions,
+      options,
+    };
   }
 }

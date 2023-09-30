@@ -6,13 +6,20 @@ import { useCart } from "@/contexts/cart";
 
 interface Props {
   options: IOptionDB[];
+  totalOptions?: number;
 }
 
-export const ListOptions: React.FC<Props> = ({ options }) => {
+export const ListOptions: React.FC<Props> = ({ options, totalOptions }) => {
   const { addItem, removeItem, getItemAmount } = useCart();
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 ">
+      {totalOptions && (
+        <div className="flex justify-between text-black">
+          <p className="text-black text-lg font-semibold">Opções</p>
+          {totalOptions}
+        </div>
+      )}
       {options.map((option) => {
         const totalItem = getItemAmount(option.id);
 

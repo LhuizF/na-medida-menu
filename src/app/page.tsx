@@ -1,10 +1,9 @@
 "use client";
-import { InputSearch } from "@/components/InputSearch";
+import { Header } from "@/components/Header";
 import { ListOptions } from "@/components/ListOptions";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import { CircularProgress } from "@mui/material";
-import { useSearchParams, useRouter } from "next/navigation";
 
 const findOptions = async (search?: string, page?: number) => {
   const queryParams = new URLSearchParams();
@@ -79,21 +78,25 @@ export default function Home() {
   return (
     <>
       <main className="min-h-screen bg-secondary">
-        <InputSearch value={search} onChange={handleSearch} />
+        <Header value={search} onChange={handleSearch} />
+
+        {isRefetching && (
+          <div className="top-16 z-10 w-full flex justify-center fixed">
+            <CircularProgress size={22} />
+          </div>
+        )}
 
         <div className="p-5">
           {isError && <p>Error</p>}
           {allOptions && allOptions.length > 0 && (
-            <ListOptions options={allOptions} />
+            <ListOptions
+              options={allOptions}
+              totalOptions={data?.totalOptions!}
+            />
           )}
         </div>
 
         <div id="end" />
-        {isRefetching && (
-          <div className="top-16 z-10 w-full flex justify-center">
-            <CircularProgress size={22} />
-          </div>
-        )}
       </main>
     </>
   );
