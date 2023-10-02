@@ -13,7 +13,7 @@ export const ListOptions: React.FC<Props> = ({ options, totalOptions }) => {
   const { addItem, removeItem, getItemAmount } = useCart();
 
   return (
-    <div className="flex flex-col gap-4 ">
+    <div className="flex flex-col gap-4">
       {totalOptions && (
         <div className="flex justify-between text-black">
           <p className="text-black text-lg font-semibold">Opções</p>

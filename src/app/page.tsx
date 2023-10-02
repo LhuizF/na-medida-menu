@@ -87,7 +87,7 @@ export default function Home() {
         <Header value={search} onChange={handleSearch} />
 
         {isRefetching && (
-          <div className="top-16 z-10 w-full flex justify-center fixed">
+          <div className="top-16 z-10 flex justify-center fixed left-1/2">
             <CircularProgress size={22} />
           </div>
         )}
